@@ -606,3 +606,8 @@ h2 { font-weight: 700; }
   padding: 0.25rem 0.75rem; font-size: 0.85rem; color: var(--encre);
 }
 .realisation-corps .bouton { margin-top: auto; align-self: flex-start; }
+
+/* Retire les coches ✓ : retour à de simples puces */
+.carte li::before { content: none; }
+.carte ul { list-style: none; padding-left: 0; }
+.carte li { padding-left: 0.2rem; }
