@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, Link, Outlet, useLocation } from 'react-router-dom';
 import { BRAND, EMAIL, WHATSAPP } from '../configuration.js';
 
 export default function Structure() {
   const { pathname } = useLocation();
+  const [ouvert, setOuvert] = useState(false);
   const theme = pathname === '/' ? 'theme-sombre' : 'theme-clair';
 
   useEffect(() => {
+    setOuvert(false);
     window.scrollTo(0, 0);
   }, [pathname]);
 
@@ -15,7 +17,18 @@ export default function Structure() {
       <header className="entete">
         <div className="conteneur entete-barre">
           <Link to="/" className="logo">{BRAND}</Link>
-          <nav className="menu">
+
+          <button
+            className={'burger' + (ouvert ? ' ouvert' : '')}
+            aria-label="Ouvrir le menu"
+            aria-expanded={ouvert}
+            aria-controls="menu-principal"
+            onClick={() => setOuvert(!ouvert)}
+          >
+            <span /><span /><span />
+          </button>
+
+          <nav id="menu-principal" className={'menu' + (ouvert ? ' ouvert' : '')}>
             <NavLink to="/" end>Accueil</NavLink>
             <NavLink to="/services">Services et prix</NavLink>
             <NavLink to="/realisations">Réalisations</NavLink>
