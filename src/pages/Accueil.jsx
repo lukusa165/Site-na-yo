@@ -1,8 +1,7 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SERVICES, libellePrix } from '../configuration.js';
+import { SERVICES } from '../configuration.js';
 import CarteService from '../composants/CarteService.jsx';
-import MaquetteSite from '../composants/MaquetteSite.jsx';
-import ApercuService from '../composants/ApercuService.jsx';
 
 const ICONES = {
   rapidite: <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />,
@@ -20,16 +19,10 @@ function Icone({ nom }) {
   );
 }
 
-const GARANTIES = [
-  'Sites adaptés au mobile',
-  'Hébergement sécurisé',
-  'Bases du référencement incluses',
-];
-
 const ATOUTS = [
-  { icone: 'rapidite', titre: 'Rapidité', texte: 'Des sites légers, pensés pour s’afficher vite sur ordinateur et mobile.' },
-  { icone: 'securite', titre: 'Sécurité', texte: 'Hébergement sécurisé et protection des données de vos visiteurs.' },
-  { icone: 'seo', titre: 'Référencement', texte: 'Les bases du référencement incluses pour être trouvé sur Google.' },
+  { icone: 'rapidite', titre: 'Rapidité', texte: 'Des sites légers, rapides sur ordinateur et mobile.' },
+  { icone: 'securite', titre: 'Sécurité', texte: 'Hébergement sécurisé et données protégées.' },
+  { icone: 'seo', titre: 'Référencement', texte: 'Les bases du référencement incluses.' },
   { icone: 'suivi', titre: 'Accompagnement', texte: 'Nous restons joignables après la mise en ligne.' },
 ];
 
@@ -39,161 +32,98 @@ const ETAPES = [
   { titre: 'Faire évoluer', texte: 'Hébergement, mises à jour et accompagnement : votre site reste à jour dans la durée.' },
 ];
 
-const QUESTIONS = [
-  {
-    q: 'Combien coûte un site ?',
-    r: 'Un site vitrine démarre à 490 € et une boutique en ligne à 1290 €. Une application web sur mesure fait l’objet d’un devis, selon vos besoins.',
-  },
-  {
-    q: 'Comment passer commande ?',
-    r: 'Choisissez un service et cliquez sur « Commander », puis remplissez le formulaire. Nous vous recontactons ensuite pour valider les détails ensemble.',
-  },
-  {
-    q: 'Mon site sera-t-il adapté au mobile ?',
-    r: 'Oui. Tous nos sites sont conçus pour s’afficher correctement sur ordinateur, tablette et téléphone.',
-  },
-  {
-    q: 'Que comprend la maintenance ?',
-    r: 'À 29 €/mois : hébergement, mises à jour, sauvegardes, sécurité et support par email. Votre site reste rapide et protégé.',
-  },
-  {
-    q: 'Puis-je faire refaire mon site existant ?',
-    r: 'Oui. La refonte, à partir de 690 €, comprend un audit de l’existant, un nouveau design et la reprise de vos contenus.',
-  },
-  {
-    q: 'Et si j’ai une question avant de commander ?',
-    r: 'Écrivez-nous par WhatsApp, par email ou avec le formulaire de la page Contact. Nous sommes là pour vous conseiller.',
-  },
-];
-
-// Ordre des illustrations = ordre des 3 premiers services
-const TYPES_APERCU = ['vitrine', 'boutique', 'app'];
+function PhotoHeros() {
+  const [ok, setOk] = useState(true);
+  if (!ok) {
+    return (
+      <div className="photo-heros photo-vide">
+        <strong>Votre photo ici</strong>
+        <small>Fichier : public/photo-accueil.jpg</small>
+      </div>
+    );
+  }
+  return (
+    <div className="photo-heros">
+      <img src="/photo-accueil.jpg" alt="Photo de présentation" onError={() => setOk(false)} />
+    </div>
+  );
+}
 
 export default function Accueil() {
   return (
     <>
-      {/* 1. Hero : blanc */}
-      <section className="conteneur heros">
-        <div>
-          <h1>Des sites web qui <span className="accent">propulsent</span> votre réussite.</h1>
-          <p className="intro">
-            Nous créons des sites modernes, rapides et soignés pour aider les
-            entreprises à se démarquer et à attirer plus de clients.
-          </p>
-          <div className="rangee">
-            <Link className="bouton" to="/services">Découvrir nos offres</Link>
-            <Link className="bouton contour" to="/contact">Nous contacter</Link>
-          </div>
-          <ul className="garanties">
-            {GARANTIES.map((g) => <li key={g}>{g}</li>)}
-          </ul>
-        </div>
-
-        <Link to="/realisations" className="imac" aria-label="Voir nos réalisations">
-          <div className="imac-ecran"><MaquetteSite /></div>
-          <div className="imac-menton" />
-          <div className="imac-pied" />
-          <div className="imac-socle" />
-          <small className="legende-maquette">Maquette d’illustration</small>
-        </Link>
-      </section>
-
-      {/* 2. Atouts : blanc */}
-      <section className="conteneur">
-        <div className="atouts">
-          {ATOUTS.map((a) => (
-            <div className="atout" key={a.titre}>
-              <span className="atout-icone"><Icone nom={a.icone} /></span>
-              <div>
-                <h3>{a.titre}</h3>
-                <p>{a.texte}</p>
-              </div>
+      {/* 1. Bleu : présentation */}
+      <div className="bande-bleue">
+        <section className="conteneur heros">
+          <div>
+            <h1>Des sites web qui <span className="accent">propulsent</span> votre réussite.</h1>
+            <p className="intro">
+              Nous créons des sites modernes, rapides et soignés pour aider les
+              entreprises à se démarquer et à attirer plus de clients.
+            </p>
+            <div className="rangee">
+              <Link className="bouton" to="/services">Découvrir nos offres</Link>
+              <Link className="bouton contour" to="/contact">Nous contacter</Link>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 3. Ce que nous faisons : bande bleu clair */}
-      <div className="bande">
-        <section className="conteneur">
-          <div className="bloc-titre">
-            <h2>Ce que nous faisons</h2>
-            <p>Une offre claire, avec des prix affichés, pour chaque besoin.</p>
           </div>
+          <PhotoHeros />
+        </section>
+
+        <section className="conteneur">
+          <div className="atouts">
+            {ATOUTS.map((a) => (
+              <div className="atout" key={a.titre}>
+                <span className="atout-icone"><Icone nom={a.icone} /></span>
+                <div>
+                  <h3>{a.titre}</h3>
+                  <p>{a.texte}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* 2. Blanc : services */}
+      <div className="zone-blanche">
+        <section className="conteneur section">
+          <h2>Ce que nous faisons</h2>
+          <p className="intro">Du site vitrine à l’application sur mesure, choisissez l’offre qui correspond à votre activité.</p>
           <div className="grille">
-            {SERVICES.slice(0, 3).map((s, i) => (
-              <div className="service-accueil" key={s.id}>
-                <ApercuService type={TYPES_APERCU[i]} />
-                <CarteService service={s} />
-              </div>
-            ))}
+            {SERVICES.map((s) => <CarteService key={s.id} service={s} avecPhoto />)}
           </div>
-
-          {SERVICES.length > 3 && (
-            <div className="et-aussi">
-              <h3>Et aussi</h3>
-              <div className="et-aussi-liste">
-                {SERVICES.slice(3, 5).map((s) => (
-                  <Link className="et-aussi-item" to={`/commander/${s.id}`} key={s.id}>
-                    <div>
-                      <strong>{s.titre}</strong>
-                      <span>{s.description}</span>
-                    </div>
-                    <b>{libellePrix(s)}</b>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div className="centre">
-            <Link to="/services" className="bouton contour">Voir tous les services</Link>
-          </div>
+          <p><Link to="/services" className="lien-fort">Voir tous les services et prix</Link></p>
         </section>
       </div>
 
-      {/* 4. Comment ça marche : blanc */}
-      <section className="conteneur section bloc-accueil">
-        <div className="bloc-titre">
-          <h2>Comment ça marche</h2>
-          <p>Trois étapes simples, de la première discussion à la mise en ligne.</p>
+      {/* 3. Bleu : méthode */}
+      <div className="section-bleue">
+        <div className="conteneur">
+          <h2>Comment nous travaillons</h2>
+          <div className="etapes">
+            {ETAPES.map((e, i) => (
+              <div className="etape" key={e.titre}>
+                <span>{i + 1}</span>
+                <h3>{e.titre}</h3>
+                <p>{e.texte}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="etapes">
-          {ETAPES.map((e, i) => (
-            <div className="etape" key={e.titre}>
-              <span>{i + 1}</span>
-              <h3>{e.titre}</h3>
-              <p>{e.texte}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      </div>
 
-      {/* 5. FAQ : bande bleu clair */}
-      <div className="bande">
+      {/* 4. Blanc : appel à l'action, bien encadré */}
+      <div className="zone-blanche zone-cta">
         <section className="conteneur">
-          <div className="bloc-titre">
-            <h2>Questions fréquentes</h2>
-            <p>Les réponses aux questions que l’on nous pose le plus souvent.</p>
-          </div>
-          <div className="faq">
-            {QUESTIONS.map((item) => (
-              <details className="faq-item" key={item.q}>
-                <summary>{item.q}</summary>
-                <p>{item.r}</p>
-              </details>
-            ))}
+          <div className="cta-blanc">
+            <div>
+              <h2>Un projet en tête ?</h2>
+              <p>Parlons-en : nous vous répondons pour valider les détails ensemble.</p>
+            </div>
+            <Link className="bouton" to="/contact">Nous contacter</Link>
           </div>
         </section>
       </div>
-
-      {/* 6. Appel final : blanc */}
-      <section className="conteneur section bloc-accueil">
-        <div className="bandeau bandeau-bleu">
-          <p>Un projet en tête ? Parlons-en.</p>
-          <Link className="bouton" to="/contact">Nous contacter</Link>
-        </div>
-      </section>
     </>
   );
 }

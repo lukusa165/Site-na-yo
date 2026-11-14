@@ -1,15 +1,11 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BRAND, SERVICES, libellePrix } from '../configuration.js';
+import { BRAND } from '../configuration.js';
 
-// À REMPLIR : tant que "texte" est vide, le bloc de présentation reste caché.
-// Exemple : { nom: 'Prénom Nom', role: 'Développeur web', texte: 'Deux ou trois phrases sur toi...' }
-const PRESENTATION = { nom: '', role: '', texte: '' };
-
-const ENGAGEMENTS = [
-  { titre: 'Rapidité', texte: 'Des sites légers, pensés pour s’afficher vite sur ordinateur et mobile.' },
-  { titre: 'Sécurité', texte: 'Hébergement sécurisé et protection des données de vos visiteurs.' },
-  { titre: 'Référencement', texte: 'Les bases du référencement incluses pour être trouvé sur Google.' },
-  { titre: 'Accompagnement', texte: 'Nous restons joignables après la mise en ligne.' },
+const VALEURS = [
+  { titre: 'Clarté', texte: 'Des sites simples à comprendre pour vos visiteurs, et simples à faire évoluer pour vous.' },
+  { titre: 'Qualité', texte: 'Des sites soignés, rapides et adaptés au mobile, de la conception à la mise en ligne.' },
+  { titre: 'Proximité', texte: 'Nous restons joignables après la livraison pour vous accompagner dans la durée.' },
 ];
 
 const ETAPES = [
@@ -18,109 +14,88 @@ const ETAPES = [
   { titre: 'Faire évoluer', texte: 'Hébergement, mises à jour et accompagnement : votre site reste à jour dans la durée.' },
 ];
 
-function initiales(nom) {
-  return nom.split(' ').filter(Boolean).map((m) => m[0]).join('').slice(0, 2).toUpperCase();
+function PhotoApropos() {
+  const [ok, setOk] = useState(true);
+  return (
+    <div className="photo-apropos">
+      {ok ? (
+        <img src="/a-propos.jpg" alt="Notre équipe au travail" loading="lazy" onError={() => setOk(false)} />
+      ) : (
+        <span>Photo : public/a-propos.jpg</span>
+      )}
+    </div>
+  );
 }
 
 export default function Apropos() {
   return (
     <>
-      <section className="conteneur entete-page">
-        <h1>À propos</h1>
-        <p className="intro">{BRAND} crée des sites internet pour les entreprises.</p>
-      </section>
-
-      {/* Approche + services */}
-      <section className="conteneur section">
-        <div className="apropos-grille">
-          <div className="texte">
-            <h2>Notre approche</h2>
-            <p>
-              Nous accompagnons chaque client de la première idée à la mise en
-              ligne, puis dans la durée : conception, développement,
-              hébergement et maintenance.
-            </p>
-            <p>
-              Nos prix sont affichés dès le départ. Après votre commande, nous
-              vous recontactons pour valider les détails ensemble.
-            </p>
-            <div className="rangee">
-              <Link className="bouton" to="/services">Voir les services</Link>
-              <Link className="bouton contour" to="/contact">Nous contacter</Link>
-            </div>
-          </div>
-
-          <div className="carte">
-            <h3>Ce que nous réalisons</h3>
-            <ul className="apropos-liste">
-              {SERVICES.map((s) => (
-                <li key={s.id}>
-                  <Link to="/services">
-                    <span>{s.titre}</span>
-                    <b>{libellePrix(s)}</b>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <section className="services-haut">
+        <div className="conteneur">
+          <h1>À propos</h1>
+          <p className="intro">
+            {BRAND} est une société de création de sites internet pour les entreprises.
+          </p>
         </div>
       </section>
 
-      {/* Engagements : bande bleu clair */}
-      <div className="bande">
-        <section className="conteneur">
-          <div className="bloc-titre">
-            <h2>Nos engagements</h2>
-            <p>Ce que vous retrouvez dans chacun de nos projets.</p>
+      <section className="conteneur section">
+        <div className="apropos-duo">
+          <div>
+            <h2>Qui sommes-nous</h2>
+            <p>
+              Nous accompagnons chaque client de la première idée à la mise en
+              ligne, puis dans la durée : conception, développement, hébergement
+              et maintenance.
+            </p>
+            <p>
+              Notre objectif est simple : vous donner un site professionnel, qui
+              présente votre activité clairement et qui vous apporte des clients.
+            </p>
+            <Link className="bouton" to="/services">Découvrir nos services</Link>
           </div>
-          <div className="engagements">
-            {ENGAGEMENTS.map((e) => (
-              <div className="engagement" key={e.titre}>
+          <PhotoApropos />
+        </div>
+      </section>
+
+      <section className="conteneur section">
+        <h2>Ce qui nous guide</h2>
+        <div className="grille">
+          {VALEURS.map((v) => (
+            <article className="carte" key={v.titre}>
+              <h3>{v.titre}</h3>
+              <p>{v.texte}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <div className="section-bleue">
+        <div className="conteneur">
+          <h2>Notre méthode</h2>
+          <div className="etapes">
+            {ETAPES.map((e, i) => (
+              <div className="etape" key={e.titre}>
+                <span>{i + 1}</span>
                 <h3>{e.titre}</h3>
                 <p>{e.texte}</p>
               </div>
             ))}
           </div>
-        </section>
+        </div>
       </div>
 
-      {/* Méthode : blanc */}
-      <section className="conteneur section bloc-accueil">
-        <div className="bloc-titre">
-          <h2>Notre méthode</h2>
-          <p>Trois étapes, de la première discussion à la mise en ligne.</p>
-        </div>
-        <div className="etapes">
-          {ETAPES.map((e, i) => (
-            <div className="etape" key={e.titre}>
-              <span>{i + 1}</span>
-              <h3>{e.titre}</h3>
-              <p>{e.texte}</p>
-            </div>
-          ))}
-        </div>
-
-        {PRESENTATION.texte && (
-          <div className="presentation">
-            <div className="presentation-photo" aria-hidden="true">
-              {initiales(PRESENTATION.nom) || '•'}
-            </div>
+      <div className="zone-blanche zone-cta">
+        <section className="conteneur">
+          <div className="cta-blanc">
             <div>
-              <h3>Qui est derrière {BRAND}</h3>
-              <p className="presentation-nom">
-                <strong>{PRESENTATION.nom}</strong>
-                {PRESENTATION.role && <span> · {PRESENTATION.role}</span>}
-              </p>
-              <p>{PRESENTATION.texte}</p>
+              <h2>Un projet en tête ?</h2>
+              <p>Parlons-en : nous vous répondons pour valider les détails ensemble.</p>
             </div>
+            <Link className="bouton" to="/contact">Nous contacter</Link>
           </div>
-        )}
-
-        <div className="bandeau bandeau-bleu">
-          <p>Un projet en tête ? Parlons-en.</p>
-          <Link className="bouton" to="/contact">Nous contacter</Link>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 }

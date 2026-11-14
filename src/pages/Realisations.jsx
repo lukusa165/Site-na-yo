@@ -1,60 +1,61 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PROJETS, SERVICES } from '../configuration.js';
-import ApercuService from '../composants/ApercuService.jsx';
+import { PROJETS } from '../configuration.js';
+
+function CartePhoto({ projet }) {
+  const [ok, setOk] = useState(true);
+  return (
+    <article className="projet">
+      <a href={projet.lien} target="_blank" rel="noreferrer" className="projet-image">
+        {ok ? (
+          <img src={projet.image} alt={`Capture du site ${projet.nom}`} loading="lazy" onError={() => setOk(false)} />
+        ) : (
+          <span className="projet-vide">{projet.nom}</span>
+        )}
+      </a>
+      <h3>{projet.nom}</h3>
+      <p className="type-projet">{projet.type}</p>
+      {projet.description && <p>{projet.description}</p>}
+      <a href={projet.lien} target="_blank" rel="noreferrer" className="lien-fort">Voir le site</a>
+    </article>
+  );
+}
 
 export default function Realisations() {
   return (
     <>
-      <section className="conteneur entete-page">
-        <h1>Réalisations</h1>
-        <p className="intro">
-          Des exemples de sites et d’applications que nous pouvons créer pour votre activité.
-        </p>
+      <section className="services-haut">
+        <div className="conteneur">
+          <h1>Réalisations</h1>
+          <p className="intro">Les projets conçus et développés par notre équipe.</p>
+        </div>
       </section>
 
       <section className="conteneur section">
-        <div className="grille">
-          {PROJETS.map((p) => {
-            const service = SERVICES.find((s) => s.id === p.service);
-            return (
-              <article className="service-accueil" key={p.nom}>
-                <div className="realisation-visuel">
-                  {p.image
-                    ? <img src={p.image} alt={`Capture du projet ${p.nom}`} loading="lazy" />
-                    : <ApercuService type={p.apercu} />}
-                  <span className="badge-exemple">Exemple</span>
-                </div>
-
-                <div className="realisation-corps">
-                  <p className="realisation-type">{p.type}</p>
-                  <h3>{p.nom}</h3>
-                  <p>{p.description}</p>
-
-                  {service && (
-                    <ul className="tags">
-                      {service.points.map((pt) => <li key={pt}>{pt}</li>)}
-                    </ul>
-                  )}
-
-                  {service && (
-                    <Link className="bouton contour" to={`/commander/${service.id}`}>
-                      {service.devis ? 'Demander un devis' : 'Commander un site similaire'}
-                    </Link>
-                  )}
-                </div>
-              </article>
-            );
-          })}
-        </div>
-
-        <p className="note-prix">
-          Ces projets sont des exemples illustratifs du type de réalisation que nous proposons.
-        </p>
-
-        <div className="bandeau bandeau-bleu">
-          <p>Un projet similaire en tête ? Parlons-en.</p>
-          <Link className="bouton" to="/contact">Nous contacter</Link>
-        </div>
+        {PROJETS.length === 0 ? (
+          <div className="realisations-vide">
+            <span className="realisations-icone" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor"
+                   strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="4" width="18" height="13" rx="2" />
+                <path d="M8 21h8M12 17v4" />
+              </svg>
+            </span>
+            <h2>Nos premières réalisations arrivent</h2>
+            <p>
+              Nous préparons la présentation de nos projets. En attendant, parlez-nous
+              du vôtre : nous le construirons avec vous.
+            </p>
+            <div className="rangee rangee-centre">
+              <Link className="bouton" to="/services">Voir nos services</Link>
+              <Link className="bouton contour" to="/contact">Nous contacter</Link>
+            </div>
+          </div>
+        ) : (
+          <div className="grille">
+            {PROJETS.map((p) => <CartePhoto key={p.nom} projet={p} />)}
+          </div>
+        )}
       </section>
     </>
   );
