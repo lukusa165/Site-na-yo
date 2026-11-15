@@ -1219,3 +1219,225 @@ html, body { background: #FFFFFF; }
 
 
 
+
+
+
+/* ===== POURQUOI CHOISIR + KINSHASA ===== */
+.raisons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: 1.4rem; }
+.raison {
+  background: #FFFFFF; border: 1px solid #DCE5F7; border-radius: 16px;
+  padding: 1.4rem; box-shadow: 0 12px 30px rgba(14, 42, 102, 0.08);
+}
+.raison-icone {
+  display: grid; place-items: center; width: 48px; height: 48px;
+  border-radius: 14px; background: #0E2A66; color: #F5B82E; margin-bottom: 0.9rem;
+}
+.raison h3 { color: #0E2250; font-size: 1.1rem; margin: 0 0 0.3rem; }
+.raison p { margin: 0; color: #56627F; font-size: 0.95rem; }
+
+.section-lieu { padding: 3.5rem 0; }
+.lieu { display: flex; align-items: center; gap: 1.6rem; }
+.lieu-icone {
+  flex: none; display: grid; place-items: center; width: 76px; height: 76px;
+  border-radius: 22px; background: #F5B82E; color: #0E2250;
+}
+.lieu h2 { margin: 0 0 0.4rem; }
+.lieu p { margin: 0; color: #C9D3F7; max-width: 58ch; }
+.lieu .rangee { margin-bottom: 0; }
+
+@media (max-width: 960px) {
+  .raisons { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .raisons { grid-template-columns: 1fr; }
+  .lieu { flex-direction: column; align-items: flex-start; }
+}
+
+
+
+/* ===== TOLEKA / SECTEURS ===== */
+.lieu .lieu-sous {
+  font: 700 1.3rem 'Bricolage Grotesque', sans-serif;
+  color: #F5B82E; margin: 0 0 0.7rem;
+}
+.secteurs { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; margin: 1rem 0 1.4rem; }
+.secteurs li {
+  background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #FFFFFF; border-radius: 99px; padding: 0.4rem 1.1rem; font-weight: 600;
+}
+
+
+.carte .inclus {
+  margin-top: auto; align-self: flex-start;
+  background: #FFF4D6; color: #0E2250; font-weight: 700; font-size: 0.92rem;
+  border: 1px solid #F5B82E; border-radius: 10px; padding: 0.55rem 0.9rem;
+}
+
+
+
+
+
+/* ===== COMMENT ÇA SE PASSE : FRISE ===== */
+.parcours-client {
+  position: relative; list-style: none; padding: 0; margin: 2.4rem 0 0;
+  display: grid; grid-template-columns: 1fr 1fr;
+  column-gap: 4.5rem; row-gap: 1.4rem;
+}
+.parcours-client::before {
+  content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px;
+  transform: translateX(-50%); border-radius: 3px;
+  background: linear-gradient(180deg, #F5B82E, rgba(245, 184, 46, 0.15));
+}
+.parcours-client li { position: relative; display: block; }
+.parcours-client li:nth-child(odd) { grid-column: 1; }
+.parcours-client li:nth-child(even) { grid-column: 2; margin-top: 2.6rem; }
+
+.parcours-client li > span {
+  position: absolute; top: 1rem; z-index: 1;
+  width: 46px; height: 46px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: #F5B82E; color: #0E2250;
+  font: 800 1.1rem 'Bricolage Grotesque', sans-serif;
+  border: 5px solid #0E2A66;
+  box-shadow: 0 0 0 2px rgba(245, 184, 46, 0.5);
+}
+.parcours-client li:nth-child(odd) > span { right: calc(-2.25rem - 23px); }
+.parcours-client li:nth-child(even) > span { left: calc(-2.25rem - 23px); }
+
+.parcours-client li > div {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px; padding: 1.3rem 1.5rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  transition: transform 0.25s, border-color 0.25s;
+}
+.parcours-client li:hover > div { transform: translateY(-3px); border-color: #F5B82E; }
+.parcours-client h3 { margin: 0 0 0.35rem; color: #FFFFFF; font-size: 1.2rem; }
+.parcours-client p { margin: 0; color: #C9D3F7; }
+
+.a-noter {
+  margin-top: 2.2rem; color: #FFFFFF;
+  background: rgba(245, 184, 46, 0.12);
+  border: 1px solid #F5B82E; border-left: 8px solid #F5B82E;
+  border-radius: 14px; padding: 1.1rem 1.4rem;
+}
+
+@media (max-width: 860px) {
+  .parcours-client { grid-template-columns: minmax(0, 1fr); row-gap: 1.1rem; }
+  .parcours-client::before { left: 22px; transform: none; }
+  .parcours-client li:nth-child(odd),
+  .parcours-client li:nth-child(even) { grid-column: 1; margin-top: 0; padding-left: 4rem; }
+  .parcours-client li:nth-child(odd) > span,
+  .parcours-client li:nth-child(even) > span { left: 0; right: auto; top: 0.9rem; }
+}
+
+/* ===== SERVICES ET PRIX ===== */
+.theme-clair .section > h2::after {
+  content: ""; display: block; width: 48px; height: 5px; margin-top: 0.6rem;
+  border-radius: 5px; background: linear-gradient(90deg, #0E2A66, #F5B82E);
+}
+.services-haut + .section .grille-services { margin-top: 1.6rem; }
+.grille-services .carte { transition: transform 0.25s, box-shadow 0.25s; }
+
+/* Yoka musala : délais */
+.delais { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 1.1rem; margin-top: 1.6rem; }
+.delai {
+  display: grid; gap: 0.6rem; align-content: start;
+  background: #FFFFFF; border: 1px solid #DCE5F7; border-top: 5px solid #0E2A66;
+  border-radius: 16px; padding: 1.2rem 1.3rem;
+  box-shadow: 0 14px 34px rgba(14, 42, 102, 0.09);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.delai:hover { transform: translateY(-4px); box-shadow: 0 22px 46px rgba(14, 42, 102, 0.16); }
+.delai strong { color: #0E2250; font: 800 1.1rem 'Bricolage Grotesque', sans-serif; }
+.delai span {
+  justify-self: start; background: #FFF4D6; color: #0E2250;
+  border: 1px solid #F5B82E; border-radius: 99px;
+  padding: 0.3rem 0.9rem; font-size: 0.92rem; font-weight: 600;
+}
+.capacite {
+  margin-top: 1.4rem; background: #F3F7FF; border: 1px solid #DCE5F7;
+  border-left: 6px solid #F5B82E; border-radius: 12px; padding: 0.9rem 1.2rem;
+  font-weight: 600; color: #0E2250;
+}
+
+/* Paiement */
+.paiement {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #0E2A66, #14387F);
+  border-radius: 22px; padding: 2.4rem 2.6rem;
+  box-shadow: 0 28px 60px rgba(14, 42, 102, 0.28);
+}
+.paiement::after {
+  content: ""; position: absolute; right: -80px; bottom: -110px;
+  width: 300px; height: 300px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(245, 184, 46, 0.22), transparent);
+}
+.paiement > * { position: relative; z-index: 1; }
+.paiement .paiement-tag { font-size: 1.5rem; }
+.moyens-paiement li {
+  font-size: 1.3rem; padding: 0.9rem 1.7rem; border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+@media (max-width: 640px) {
+  .paiement { padding: 1.6rem; }
+  .moyens-paiement li { font-size: 1.15rem; }
+}
+
+
+
+/* ===== SERVICES : CORRECTIONS PAIEMENT ET DÉLAIS ===== */
+.theme .paiement {
+  position: relative; overflow: hidden;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1.6rem;
+  background: linear-gradient(135deg, #0E2A66, #14387F);
+  border-radius: 22px; padding: 2.4rem 2.6rem;
+  box-shadow: 0 28px 60px rgba(14, 42, 102, 0.28);
+}
+.theme .paiement h2 { color: #FFFFFF; margin: 0 0 0.4rem; }
+.theme .paiement h2::after { display: none; }
+.theme .paiement p { color: #D7DFFA; margin: 0; max-width: 50ch; }
+.theme .paiement .paiement-tag {
+  color: #F5B82E; font: 800 1.5rem 'Bricolage Grotesque', sans-serif; margin: 0 0 0.6rem;
+}
+.theme .moyens-paiement { list-style: none; padding: 0; margin: 0; display: flex; gap: 0.8rem; flex-wrap: wrap; }
+.theme .moyens-paiement li {
+  background: #F5B82E; color: #0E2250; font-weight: 800; font-size: 1.3rem;
+  border-radius: 14px; padding: 0.9rem 1.7rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+/* Délais : plus de pastille déformée */
+.theme .delai span {
+  justify-self: stretch;
+  border-radius: 12px; padding: 0.6rem 0.9rem;
+  background: #FFF4D6; color: #0E2250; border: 1px solid #F5B82E;
+  font-size: 0.95rem; font-weight: 600; line-height: 1.4;
+}
+.theme .delais { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.theme .capacite { color: #0E2250; }
+
+@media (max-width: 640px) {
+  .theme .paiement { padding: 1.6rem; }
+  .theme .moyens-paiement li { font-size: 1.15rem; padding: 0.8rem 1.3rem; }
+}
+
+
+/* ===== PHOTOS DES CARTES : PLEINE LARGEUR, SANS CADRE ===== */
+.theme .carte .carte-photo {
+  display: block; padding: 0;
+  margin: -1.5rem -1.5rem 1rem;
+  aspect-ratio: 16 / 10; overflow: hidden;
+  border-radius: 13px 13px 0 0;
+  background: #0E2A66;
+}
+.theme .carte .carte-photo img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover;
+}
+.theme .carte .carte-photo span {
+  display: grid; place-items: center; height: 100%;
+  padding: 0.6rem; text-align: center; font-size: 0.85rem;
+  background: #EEF3FF; color: #56627F;
+}

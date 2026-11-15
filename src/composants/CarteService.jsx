@@ -14,6 +14,7 @@ function PhotoService({ service }) {
           src={`/services/${service.id}.${EXTENSIONS[i]}`}
           alt={service.titre}
           loading="lazy"
+          style={{ objectPosition: service.cadrage || 'center' }}
           onError={() => setI(i + 1)}
         />
       ) : (
@@ -33,9 +34,13 @@ export default function CarteService({ service, avecPhoto = false }) {
       <ul>
         {service.points.map((p) => <li key={p}>{p}</li>)}
       </ul>
-      <Link className="bouton" to={`/commander/${service.id}`}>
-        {service.devis ? 'Demander un devis' : 'Commander'}
-      </Link>
+      {service.inclus ? (
+        <p className="inclus">Incluse après la livraison de votre site</p>
+      ) : (
+        <Link className="bouton" to={`/commander/${service.id}`}>
+          {service.devis ? 'Demander un devis' : 'Commander'}
+        </Link>
+      )}
     </article>
   );
 }

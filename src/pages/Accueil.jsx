@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SERVICES } from '../configuration.js';
+import { BRAND, VILLE, WHATSAPP, SERVICES, SECTEURS, PARCOURS, A_NOTER } from '../configuration.js';
 import CarteService from '../composants/CarteService.jsx';
 
 const ICONES = {
@@ -8,11 +8,15 @@ const ICONES = {
   securite: <><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z" /><path d="M8.5 12l2.5 2.5 4.5-5" /></>,
   seo: <><circle cx="11" cy="11" r="6" /><path d="M20 20l-4.5-4.5" /></>,
   suivi: <path d="M4 5h16v11H9l-5 4V5z" />,
+  prix: <><path d="M3 12V4h8l10 10-8 8L3 12z" /><circle cx="7.5" cy="8.5" r="1.5" /></>,
+  mobile: <><rect x="7" y="2" width="10" height="20" rx="2" /><path d="M11 18h2" /></>,
+  commande: <><circle cx="9" cy="20" r="1.5" /><circle cx="18" cy="20" r="1.5" /><path d="M2 3h3l2.5 12h11L21 7H6" /></>,
+  lieu: <><path d="M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" /></>,
 };
 
-function Icone({ nom }) {
+function Icone({ nom, taille = 24 }) {
   return (
-    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+    <svg viewBox="0 0 24 24" width={taille} height={taille} fill="none" stroke="currentColor"
          strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       {ICONES[nom]}
     </svg>
@@ -26,10 +30,11 @@ const ATOUTS = [
   { icone: 'suivi', titre: 'Accompagnement', texte: 'Nous restons joignables après la mise en ligne.' },
 ];
 
-const ETAPES = [
-  { titre: 'Comprendre', texte: 'Nous écoutons votre activité, vos clients et vos objectifs avant de dessiner quoi que ce soit.' },
-  { titre: 'Construire', texte: 'Nous concevons et développons un site clair, rapide et adapté au mobile, puis nous le mettons en ligne.' },
-  { titre: 'Faire évoluer', texte: 'Hébergement, mises à jour et accompagnement : votre site reste à jour dans la durée.' },
+const RAISONS = [
+  { icone: 'prix', titre: 'Des prix clairs', texte: 'Le prix de chaque offre est affiché avant que vous commandiez.' },
+  { icone: 'mobile', titre: 'Pensé pour le mobile', texte: 'Un site lisible sur téléphone, là où vos clients vous cherchent.' },
+  { icone: 'commande', titre: 'Une commande simple', texte: 'Vous commandez en ligne en quelques minutes, puis nous vous recontactons.' },
+  { icone: 'suivi', titre: 'Une équipe joignable', texte: 'Écrivez-nous par WhatsApp ou par email, avant comme après la mise en ligne.' },
 ];
 
 function PhotoHeros() {
@@ -89,30 +94,75 @@ export default function Accueil() {
         <section className="conteneur section">
           <h2>Ce que nous faisons</h2>
           <p className="intro">Du site vitrine à l’application sur mesure, choisissez l’offre qui correspond à votre activité.</p>
-          <div className="grille">
+          <div className="grille-services">
             {SERVICES.map((s) => <CarteService key={s.id} service={s} avecPhoto />)}
           </div>
           <p><Link to="/services" className="lien-fort">Voir tous les services et prix</Link></p>
         </section>
       </div>
 
-      {/* 3. Bleu : méthode */}
+      {/* 3. Bleu : comment ça se passe */}
       <div className="section-bleue">
         <div className="conteneur">
-          <h2>Comment nous travaillons</h2>
-          <div className="etapes">
-            {ETAPES.map((e, i) => (
-              <div className="etape" key={e.titre}>
+          <h2>Comment ça se passe</h2>
+          <ol className="parcours-client">
+            {PARCOURS.map((e, i) => (
+              <li key={e.titre}>
                 <span>{i + 1}</span>
-                <h3>{e.titre}</h3>
-                <p>{e.texte}</p>
-              </div>
+                <div>
+                  <h3>{e.titre}</h3>
+                  <p>{e.texte}</p>
+                </div>
+              </li>
             ))}
+          </ol>
+          <p className="a-noter"><strong>À noter :</strong> {A_NOTER}</p>
+        </div>
+      </div>
+
+      {/* 4. Blanc : pourquoi choisir */}
+      <div className="zone-blanche">
+        <section className="conteneur section">
+          <h2>Pourquoi choisir {BRAND} ?</h2>
+          <div className="raisons">
+            {RAISONS.map((r) => (
+              <article className="raison" key={r.titre}>
+                <span className="raison-icone"><Icone nom={r.icone} /></span>
+                <h3>{r.titre}</h3>
+                <p>{r.texte}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* 5. Bleu : Toleka, Kinshasa */}
+      <div className="section-bleue section-lieu">
+        <div className="conteneur lieu">
+          <span className="lieu-icone"><Icone nom="lieu" taille={34} /></span>
+          <div>
+            <h2>Toleka</h2>
+            <p className="lieu-sous">Nous travaillons à {VILLE}</p>
+            <p>
+              Nous accompagnons à {VILLE}, comme à l’international, dans la
+              création de leur site internet :
+            </p>
+            <ul className="secteurs">
+              {SECTEURS.map((s) => <li key={s}>{s}</li>)}
+            </ul>
+            <div className="rangee">
+              {WHATSAPP && (
+                <a className="bouton" href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer">
+                  Écrire sur WhatsApp
+                </a>
+              )}
+              <Link className="bouton contour" to="/contact">Nous contacter</Link>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* 4. Blanc : appel à l'action, bien encadré */}
+      {/* 6. Blanc : appel à l'action */}
       <div className="zone-blanche zone-cta">
         <section className="conteneur">
           <div className="cta-blanc">
