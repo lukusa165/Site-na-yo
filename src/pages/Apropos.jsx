@@ -34,7 +34,7 @@ export default function Apropos() {
         <div className="conteneur">
           <h1>À propos</h1>
           <p className="intro">
-            {BRAND} est une société de création de sites internet pour les entreprises.
+            {BRAND} est une société creer par one-dev de création de sites internet pour les entreprises, les écoles ,les hopitaux et pour chaque individue.
           </p>
         </div>
       </section>

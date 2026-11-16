@@ -1,8 +1,8 @@
 // ===== Informations générales =====
-export const BRAND = 'kotonga-site';
+export const BRAND = 'Tosala-site';
 export const EMAIL = 'ondev@gmail.com';
 export const WHATSAPP = ''; // format international sans + ni espaces, ex : 243812345678
-export const ADMIN_PATH = '/acces-na-yo-7f3k'; // adresse secrète de l'admin
+export const ADMIN_PATH = '/tolekaa'; // adresse secrète de l'admin
 export const VILLE = 'Kinshasa';
 export const DEVISE = '$';
 export const DOMAINE = 15; // renouvellement annuel du nom de domaine
@@ -13,12 +13,12 @@ export const SECTEURS = ['Écoles', 'Hôpitaux', 'Entreprises'];
 // cadrage : position de la photo dans la carte ('center', 'center top', 'center bottom', 'center 20%'...)
 export const SERVICES = [
   {
-    id: 'vitrine', titre: 'Site vitrine', prix: 490, apartirDe: true,
+    id: 'vitrine', titre: 'Site vitrine', prix: 49, apartirDe: true,
     description: 'Présentez votre entreprise en 3 à 5 pages, adaptées au mobile et prêtes à être trouvées sur Google.',
     points: ['Design sur mesure', 'Formulaire de contact', 'Référencement de base'],
   },
   {
-    id: 'ecommerce', titre: 'Site e-commerce', prix: 1290, apartirDe: true,
+    id: 'ecommerce', titre: 'Site e-commerce', prix: 100, apartirDe: true,
     description: 'Une boutique en ligne avec catalogue, panier et paiement sécurisé.',
     points: ['Catalogue produits', 'Paiement en ligne', 'Gestion des commandes'],
   },
@@ -29,7 +29,7 @@ export const SERVICES = [
     points: ['Analyse du besoin', 'Développement dédié', 'Formation à l’usage'],
   },
   {
-    id: 'refonte', titre: 'Refonte de site', prix: 60, apartirDe: true,
+    id: 'refonte', titre: 'Refonte de site', prix: 30, apartirDe: true,
     description: 'Modernisez un site existant : design, vitesse et affichage mobile.',
     points: ['Audit de l’existant', 'Nouveau design', 'Reprise des contenus'],
   },
@@ -40,7 +40,7 @@ export const SERVICES = [
     points: ['Suivi de votre site après la livraison', 'Corrections si un problème apparaît', 'Nous restons joignables pendant ces trois mois'],
   },
   {
-    id: 'maintenance', titre: 'Maintenance et hébergement', prix: 29, apartirDe: false, par: '/mois',
+    id: 'maintenance', titre: 'Maintenance et hébergement', prix: 15, apartirDe: false, par: '/mois',
     description: 'Mises à jour, sauvegardes, sécurité et hébergement : votre site reste rapide et protégé.',
     points: ['Hébergement inclus', 'Sauvegardes', 'Support par email'],
   },
@@ -54,12 +54,12 @@ export function libellePrix(s) {
 // ===== Yoka musala : délais et capacité =====
 // Exemple de délai : '5 à 7 jours'. Laissez vide pour afficher « Précisé à la confirmation ».
 export const DELAIS = {
-  vitrine: '',
-  ecommerce: '',
-  'sur-mesure': '',
-  refonte: '',
+  vitrine: '48 à 72 heures',
+  ecommerce: '1 à 2 semaines',
+  'sur-mesure': '1 à 2 mois',
+  refonte: '48heures',
   'maintenance-3-mois': 'Dès la livraison de votre site',
-  maintenance: '',
+  maintenance: '24heures',
 };
 export const CAPACITE = ''; // Exemple : 'Nous prenons 5 projets à la fois.'
 
