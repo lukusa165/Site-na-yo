@@ -34,7 +34,7 @@ export default function Apropos() {
         <div className="conteneur">
           <h1>À propos</h1>
           <p className="intro">
-            {BRAND} est une société creer par one-dev de création de sites internet pour les entreprises, les écoles ,les hopitaux et pour chaque individue.
+            {BRAND} est une société créée par one-Dev, spécialisée dans la conception et création de sites Internet professionnels pour les entreprises, les écoles, les hôpitaux ainsi que les particuliers.
           </p>
         </div>
       </section>
