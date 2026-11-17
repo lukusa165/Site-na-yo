@@ -16,8 +16,10 @@ export default function Structure() {
     <div className={`theme ${theme}`}>
       <header className="entete">
         <div className="conteneur entete-barre">
-          <Link to="/" className="logo">{BRAND}</Link>
-
+         <Link to="/" className="logo" aria-label={BRAND}>
+  <img src="/logo-blanc.png" alt="" className="logo-img" />
+  <span>{BRAND}</span>
+</Link>
           <button
             className={'burger' + (ouvert ? ' ouvert' : '')}
             aria-label="Ouvrir le menu"
@@ -44,7 +46,10 @@ export default function Structure() {
 
       <footer className="pied">
         <div className="conteneur pied-contenu">
-          <strong>{BRAND}</strong>
+         <strong className="pied-marque">
+  <img src={theme === 'theme-sombre' ? '/logo-blanc.png' : '/logo-bleu.png'} alt="" className="logo-pied" />
+  {BRAND}
+</strong>
           <span>
             {EMAIL && <a href={`mailto:${EMAIL}`}>{EMAIL}</a>}
             {WHATSAPP && (

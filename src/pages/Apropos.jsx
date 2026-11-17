@@ -19,9 +19,9 @@ function PhotoApropos() {
   return (
     <div className="photo-apropos">
       {ok ? (
-        <img src="/a-propos.jpg" alt="Notre équipe au travail" loading="lazy" onError={() => setOk(false)} />
+        <img src="/logo-bleu.png" alt="Notre équipe au travail" loading="lazy" onError={() => setOk(false)} />
       ) : (
-        <span>Photo : public/a-propos.jpg</span>
+        <span>Photo : public/logo-bleu.png</span>
       )}
     </div>
   );

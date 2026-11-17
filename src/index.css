@@ -1441,3 +1441,15 @@ html, body { background: #FFFFFF; }
   padding: 0.6rem; text-align: center; font-size: 0.85rem;
   background: #EEF3FF; color: #56627F;
 }
+
+
+
+/* ===== LOGO ===== */
+.theme .entete .logo { display: inline-flex; align-items: center; gap: 0.6rem; }
+.theme .entete .logo::after { display: none; }
+.logo-img { height: 38px; width: auto; display: block; }
+.pied-marque { display: inline-flex; align-items: center; gap: 0.6rem; }
+.logo-pied { height: 30px; width: auto; display: block; }
+@media (max-width: 760px) {
+  .logo-img { height: 34px; }
+}

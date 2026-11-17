@@ -1,7 +1,7 @@
 // ===== Informations générales =====
 export const BRAND = 'Tosala-site';
 export const EMAIL = 'ondev@gmail.com';
-export const WHATSAPP = ''; // format international sans + ni espaces, ex : 243812345678
+export const WHATSAPP = '243831511015'; // format international sans + ni espaces, ex : 243812345678
 export const ADMIN_PATH = '/tolekaa'; // adresse secrète de l'admin
 export const VILLE = 'Kinshasa';
 export const DEVISE = '$';
